@@ -2,8 +2,6 @@ package roomescape.domain;
 
 import roomescape.domain.reservationStatus.PendingStatus;
 import roomescape.domain.reservationStatus.ReservationStatus;
-import roomescape.global.exception.CustomException;
-import roomescape.global.exception.ErrorCode;
 
 import java.time.LocalDate;
 import java.util.Objects;

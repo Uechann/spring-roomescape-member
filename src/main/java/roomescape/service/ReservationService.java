@@ -49,6 +49,8 @@ public class ReservationService {
 
         Theme theme = getThemeOrElseThrow(themeId);
         Time time = getTimeOrElseThrow(reservationTimeId);
+        validateDateTime(date, time);
+        
         Reservation reservation = reservationRepository.save(new Reservation(name, date, time, theme));
         themeSlotRepository.update(new ThemeSlot(theme, date, time, true));
         return reservation;

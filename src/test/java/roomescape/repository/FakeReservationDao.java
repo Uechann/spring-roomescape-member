@@ -46,8 +46,8 @@ public class FakeReservationDao implements ReservationRepository {
     public boolean isExistBy(Long themeId, LocalDate date, Long reservationTimeId) {
         return storage.values().stream()
                 .anyMatch(reservation ->
-                        Objects.equals(reservation.getTime().getId(), reservationTimeId) ||
-                                Objects.equals(reservation.getTheme().getId(), themeId) ||
+                        Objects.equals(reservation.getTime().getId(), reservationTimeId) &&
+                                Objects.equals(reservation.getTheme().getId(), themeId) &&
                                 reservation.getDate().equals(date)
                 );
     }

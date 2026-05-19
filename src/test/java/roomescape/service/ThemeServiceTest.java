@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import roomescape.domain.Theme;
+import roomescape.repository.FakeReservationDao;
 import roomescape.repository.FakeThemeDao;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class ThemeServiceTest {
     @BeforeEach
     void setUp() {
         FakeThemeDao fakeThemeDao = new FakeThemeDao();
-        themeService = new ThemeService(fakeThemeDao);
+        FakeReservationDao fakeReservationDao = new FakeReservationDao();
+        themeService = new ThemeService(fakeThemeDao, fakeReservationDao);
     }
 
     @Test

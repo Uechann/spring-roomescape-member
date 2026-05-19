@@ -23,15 +23,17 @@ public class TimeService {
     private final TimeRepository timeRepository;
     private final ThemeSlotRepository themeSlotRepository;
     private final ThemeRepository themeRepository;
+    private final ReservationRepository reservationRepository;
 
     public TimeService(
             TimeRepository timeRepository,
             ThemeSlotRepository themeSlotRepository,
-            ThemeRepository themeRepository
+            ThemeRepository themeRepository, ReservationRepository reservationRepository
     ) {
         this.timeRepository = timeRepository;
         this.themeSlotRepository = themeSlotRepository;
         this.themeRepository = themeRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     public List<Time> allTimes() {
@@ -45,7 +47,7 @@ public class TimeService {
 
     public void removeTime(long timeId) {
         getTimeOrElseThrow(timeId);
-        if (timeRepository.existsByReferencedId(timeId)) {
+        if (reservationRepository.existsByTimeId(timeId)) {
             throw new CustomException(ErrorCode.TIME_IS_REFERENCED);
         }
 

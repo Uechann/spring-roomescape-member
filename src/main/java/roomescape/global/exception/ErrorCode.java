@@ -26,8 +26,8 @@ public enum ErrorCode {
     TIME_IS_REFERENCED(HttpStatus.UNPROCESSABLE_ENTITY, "예약에 해당하는 시간이 존재합니다."),
 
     // theme
-    THEME_NOT_FOUND(HttpStatus.NOT_FOUND, "테마가 존재하지 않습니다.");
-
+    THEME_NOT_FOUND(HttpStatus.NOT_FOUND, "테마가 존재하지 않습니다."),
+    THEME_IS_REFERENCED(HttpStatus.UNPROCESSABLE_ENTITY, "예약에 해당하는 시간이 존재합니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

@@ -24,14 +24,16 @@ class TimeServiceTest {
     private FakeTimeDao fakeTimeDao;
     private FakeThemeDao fakeThemeDao;
     private FakeThemeSlotDao fakeThemeSlotDao;
+    private FakeReservationDao fakeReservationDao;
 
     @BeforeEach
     void setUp() {
         fakeTimeDao = new FakeTimeDao();
         fakeThemeDao = new FakeThemeDao();
         fakeThemeSlotDao = new FakeThemeSlotDao();
+        fakeReservationDao = new FakeReservationDao();
 
-        reservationTimeService = new TimeService(fakeTimeDao, fakeThemeSlotDao, fakeThemeDao);
+        reservationTimeService = new TimeService(fakeTimeDao, fakeThemeSlotDao, fakeThemeDao, fakeReservationDao);
     }
 
     @Test

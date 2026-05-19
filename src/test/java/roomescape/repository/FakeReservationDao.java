@@ -94,4 +94,20 @@ public class FakeReservationDao implements ReservationRepository {
         storage.remove(id);
         storage.put(id, newReservation);
     }
+
+    @Override
+    public boolean existsByThemeId(long themeId) {
+        return storage.values().stream()
+                .anyMatch(reservation ->
+                            Objects.equals(reservation.getTheme().getId(), themeId)
+                );
+    }
+
+    @Override
+    public boolean existsByTimeId(long timeId) {
+        return storage.values().stream()
+                .anyMatch(reservation ->
+                        Objects.equals(reservation.getTime().getId(), timeId)
+                );
+    }
 }

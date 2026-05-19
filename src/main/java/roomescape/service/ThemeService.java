@@ -8,15 +8,18 @@ import org.springframework.stereotype.Service;
 import roomescape.domain.Theme;
 import roomescape.global.exception.CustomException;
 import roomescape.global.exception.ErrorCode;
+import roomescape.repository.ReservationRepository;
 import roomescape.repository.ThemeRepository;
 
 @Service
 public class ThemeService {
 
     private final ThemeRepository themeRepository;
+    private final ReservationRepository reservationRepository;
 
-    public ThemeService(ThemeRepository themeRepository) {
+    public ThemeService(ThemeRepository themeRepository, ReservationRepository reservationRepository) {
         this.themeRepository = themeRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     public List<Theme> allTheme() {
@@ -30,6 +33,9 @@ public class ThemeService {
 
     public void removeTheme(long themeId) {
         getThemeOrElseThrow(themeId);
+        if (reservationRepository.existsByThemeId(themeId)) {
+            throw new CustomException(ErrorCode.THEME_IS_REFERENCED);
+        }
         themeRepository.deleteById(themeId);
     }
 

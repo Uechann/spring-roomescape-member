@@ -26,4 +26,8 @@ public interface ReservationRepository {
     void updateStatus(Reservation reservation);
 
     void updateDateAndTimeAndTheme(Reservation reservation);
+
+    boolean existsByThemeId(long themeId);
+
+    boolean existsByTimeId(long timeId);
 }

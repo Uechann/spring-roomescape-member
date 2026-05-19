@@ -50,7 +50,7 @@ public class ReservationService {
         Theme theme = getThemeOrElseThrow(themeId);
         Time time = getTimeOrElseThrow(reservationTimeId);
         validateDateTime(date, time);
-        
+
         Reservation reservation = reservationRepository.save(new Reservation(name, date, time, theme));
         themeSlotRepository.update(new ThemeSlot(theme, date, time, true));
         return reservation;
@@ -58,8 +58,9 @@ public class ReservationService {
 
     @Transactional
     public void removeReservation(long reservationId) {
-        getReservationOrElseThrow(reservationId);
+        Reservation reservation = getReservationOrElseThrow(reservationId);
         reservationRepository.deleteById(reservationId);
+        themeSlotRepository.update(new ThemeSlot(reservation.getTheme(), reservation.getDate(), reservation.getTime(), false));
     }
 
     public Reservation findReservation(long reservationId) {
@@ -75,6 +76,7 @@ public class ReservationService {
         Reservation reservation = getReservationOrElseThrow(reservationId);
         reservation.cancel();
         reservationRepository.updateStatus(reservation);
+        themeSlotRepository.update(new ThemeSlot(reservation.getTheme(), reservation.getDate(), reservation.getTime(), false));
     }
 
     @Transactional
